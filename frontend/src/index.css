@@ -1,0 +1,277 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/newsreader";
+
+/* One palette, two lightness settings. Same accent hue in both themes. */
+:root {
+  --bg: #f4f4f1;
+  --surface: #ffffff;
+  --sunken: #eeeeea;
+  --ink: #1e211f;
+  --muted: #666b67;
+  --line: #e0e0da;
+  --line-strong: #cfcfc8;
+  --accent: #17695f;
+  --accent-ink: #ffffff;
+  --accent-soft: #e3efec;
+  --danger: #b42318;
+  --danger-soft: #fbeceb;
+  --warn: #8a5a00;
+  --warn-soft: #f8f0dc;
+  color-scheme: light;
+}
+.dark {
+  --bg: #161817;
+  --surface: #1e2120;
+  --sunken: #191b1a;
+  --ink: #ecece7;
+  --muted: #9a9f9a;
+  --line: #2b2f2d;
+  --line-strong: #3a3f3c;
+  --accent: #5cbfaa;
+  --accent-ink: #0f1b18;
+  --accent-soft: #1f2f2b;
+  --danger: #f0867d;
+  --danger-soft: #35201f;
+  --warn: #e3b75c;
+  --warn-soft: #302a1b;
+  color-scheme: dark;
+}
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+  --radius-control: 8px;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum' 1;
+}
+::selection { background: var(--accent-soft); }
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Suppress blinking text cursor (caret) across UI text, headings, and labels */
+  *:not(input, textarea, [contenteditable="true"]) {
+    caret-color: transparent !important;
+  }
+
+  input, textarea, [contenteditable="true"] {
+    caret-color: auto !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    cursor: default;
+  }
+}
+
+.prose-answer {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 72ch;
+  color: var(--ink);
+}
+
+.prose-answer h1,
+.prose-answer h2,
+.prose-answer h3,
+.prose-answer h4 {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-answer h1 { font-size: 1.5rem; }
+.prose-answer h2 { font-size: 1.3rem; border-bottom: 1px solid var(--line); padding-bottom: 0.3em; }
+.prose-answer h3 { font-size: 1.15rem; }
+.prose-answer h4 { font-size: 1.05rem; }
+
+.prose-answer p {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose-answer strong,
+.prose-answer b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.prose-answer ul {
+  list-style-type: disc;
+  padding-left: 1.4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.prose-answer ol {
+  list-style-type: decimal;
+  padding-left: 1.4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.prose-answer li {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  line-height: 1.6;
+}
+
+.prose-answer li > p {
+  margin: 0;
+  display: inline;
+}
+
+/* Code & formulas */
+.prose-answer code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.84em;
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+  background-color: var(--sunken);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.prose-answer pre {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background-color: var(--sunken);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.prose-answer pre code {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+}
+
+/* Responsive tables */
+.prose-answer .table-container {
+  overflow-x: auto;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.prose-answer table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.prose-answer thead {
+  background-color: var(--sunken);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.prose-answer th {
+  padding: 0.65rem 0.85rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--ink);
+  font-size: 0.775rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.prose-answer td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  vertical-align: top;
+}
+
+.prose-answer tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.prose-answer tbody tr:hover {
+  background-color: var(--sunken);
+}
+
+/* Blockquotes */
+.prose-answer blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.prose-answer hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Inline scholarly citation tags */
+.prose-answer .inline-citation {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  padding: 0 0.35rem;
+  border-radius: 4px;
+  margin: 0 0.2rem;
+  vertical-align: baseline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes shimmer { 0% { opacity: .55 } 50% { opacity: 1 } 100% { opacity: .55 } }
+.skeleton { background: var(--sunken); border-radius: 6px; animation: shimmer 1.4s ease-in-out infinite; }
+@keyframes spin { to { transform: rotate(360deg) } }
+.spin { animation: spin 0.8s linear infinite; }
